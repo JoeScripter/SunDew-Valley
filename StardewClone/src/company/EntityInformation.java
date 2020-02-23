@@ -6,12 +6,14 @@ public class EntityInformation {
     private int y;
     private int width;
     private int height;
+    private boolean passable;
 
-    public EntityInformation(int x, int y, int width, int height) {
+    public EntityInformation(int x, int y, int width, int height, boolean passable) {
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
+        this.passable = passable;
     }
 
     public int getX() {
@@ -44,5 +46,13 @@ public class EntityInformation {
 
     public void setHeight(int height) {
         this.height = height;
+    }
+
+    public boolean isPassable() {
+        return passable;
+    }
+
+    public void setPassable(boolean passable) {
+        this.passable = passable;
     }
 }

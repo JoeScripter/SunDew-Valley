@@ -10,6 +10,9 @@ public class PlayerCommand {
     private final double sinConstant = 0.71;
     private ArrayList<Entity> nearbyEntities;
 
+    private int lastSolvedNextX;
+    private int lastSolvedNextY;
+
 
     public PlayerCommand(Renderer r, Display d) {
         this.r = r;
@@ -17,9 +20,9 @@ public class PlayerCommand {
         nearbyEntities = new ArrayList<>();
     }
 
-    public void spawnEntity(Entity e){
+    public void spawnEntity(Entity e, Color color){
         EntityInformation ei = e.getEntityInformation();
-        r.drawRectangle(ei.getX(), ei.getY(), ei.getWidth(), ei.getHeight(), Color.RED);
+        r.drawRectangle(ei.getX(), ei.getY(), ei.getWidth(), ei.getHeight(), color);
     }
 
     public void spawnPlayer(Player p){
@@ -28,6 +31,7 @@ public class PlayerCommand {
 
     public void spawnPlayer(Player p, int x, int y){
         r.showImage(p.getPlayerImagePath(), x, y);
+//        r.drawRectangle(x, y, p.getEntityInformation().getWidth(), p.getEntityInformation().getHeight(), Color.BLACK);
         p.getEntityInformation().setX(x);
         p.getEntityInformation().setY(y);
     }
@@ -76,23 +80,78 @@ public class PlayerCommand {
         int width = playerInfo.getWidth();
         int height = playerInfo.getHeight();
 
-        if(collisionAhead(p, right+left, up+down)){
+        int xDirection = right+left;
+        int yDirection = up+down;
+        int xDirectionTemp = right+left;
+        int yDirectionTemp = up+down;
+
+        if(lastSolvedNextX == x+xDirection && lastSolvedNextY == y+yDirection){
             return;
-            //TODO try to make collision pixel perfect
+        }
+
+        if(collisionAhead(p, xDirection, yDirection)){
+            boolean skip = false;
+            lastSolvedNextX = x+xDirection;
+            lastSolvedNextY = y+yDirection;
+            do {
+                if(!p.isLeftFlag() && !p.isRightFlag()){
+                    skip = true;
+                }
+                if(p.isLeftFlag() && !skip){
+                    if(xDirection >= 0){
+                        xDirection = xDirectionTemp;
+                        skip = true;
+                    }
+                    else {
+                        xDirection += 1;
+                    }
+                }
+                if(p.isRightFlag() && !skip){
+                    if(xDirection <= 0){
+                        xDirection = xDirectionTemp;
+                        skip = true;
+                    }
+                    else {
+                        xDirection -= 1;
+                    }
+                }
+                if(p.isUpFlag() && skip){
+                    if(yDirection >= 0){
+                        yDirection = yDirectionTemp;
+                        break;
+                    }
+                    else {
+                        yDirection += 1;
+                    }
+                }
+                if(p.isDownFlag() && skip){
+                    if(yDirection <= 0){
+                        yDirection = yDirectionTemp;
+                        break;
+                    }
+                    else {
+                        yDirection -= 1;
+                    }
+                }
+            }
+            while(collisionAhead(p, xDirection, yDirection));
         }
 
         r.drawRectangle(x, y, width, height, Color.WHITE);
-        r.showImage(p.getPlayerImagePath(),x+right+left, y+up+down);
+        r.showImage(p.getPlayerImagePath(),x+xDirection, y+yDirection);
+//        r.drawRectangle(x+xDirection, y+yDirection, p.getEntityInformation().getWidth(), p.getEntityInformation().getHeight(), Color.BLACK);
         d.repaint();
 
-
-        p.getEntityInformation().setX(x+right+left);
-        p.getEntityInformation().setY(y+up+down);
+        p.getEntityInformation().setX(x+xDirection);
+        p.getEntityInformation().setY(y+yDirection);
     }
 
     private boolean collisionAhead(Player p, int xDirection, int yDirection){
         boolean result = false;
         for(Entity e : nearbyEntities){
+            if(e.getEntityInformation().isPassable()){
+                continue;
+            }
             EntityInformation ei = e.getEntityInformation();
             EntityInformation pei = p.getEntityInformation();
             int playerNextX = pei.getX()+xDirection;

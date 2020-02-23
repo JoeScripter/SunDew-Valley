@@ -4,8 +4,8 @@ public class Entity {
 
     private EntityInformation entityInformation;
 
-    public Entity(int x, int y, int width, int height) {
-        this.entityInformation = new EntityInformation(x, y, width, height);
+    public Entity(int x, int y, int width, int height, boolean passable) {
+        this.entityInformation = new EntityInformation(x, y, width, height, passable);
     }
 
     public EntityInformation getEntityInformation() {

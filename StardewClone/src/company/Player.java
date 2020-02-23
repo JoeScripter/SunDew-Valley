@@ -3,7 +3,7 @@ package company;
 public class Player extends Entity{
 
     private int speed;
-    private String playerImagePath = "D:\\Programming\\Java\\StardewClone\\player.png";
+    private String playerImagePath = ".\\player.png";
 
     private boolean leftFlag;
     private boolean rightFlag;
@@ -12,7 +12,7 @@ public class Player extends Entity{
 
     public Player(int x, int y, int w, int h, int speed){
 
-        super(x, y, w, h);
+        super(x, y, w, h, false);
 
         this.speed = speed;
 
