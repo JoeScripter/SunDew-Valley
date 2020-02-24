@@ -10,10 +10,16 @@ public class Renderer {
 
     private Graphics2D g;
     private BufferedImage bitmap;
+    private BufferedImage image;
 
     public Renderer(BufferedImage b){
         bitmap = b;
         g = bitmap.createGraphics();
+        try{
+            image = ImageIO.read(new File(".\\player.png"));
+        }catch(IOException e){
+            System.out.println(e);
+        }
     }
 
     public void putPixel(int x, int y, Color color){
@@ -39,12 +45,7 @@ public class Renderer {
     }
 
     public void showImage(String path, int x, int y){
-        try {
-            BufferedImage image = ImageIO.read(new File(path));
             g.drawImage(image, x, y, null);
-        } catch(IOException e){
-            e.printStackTrace();
-        }
     }
 
     public void clear(){

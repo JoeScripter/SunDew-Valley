@@ -160,7 +160,6 @@ public class PlayerCommand {
                     playerNextY+pei.getHeight() >= ei.getY() && playerNextY <= ei.getY()+ei.getHeight()){
                 result = true;
             }
-//
         }
         return result;
     }
