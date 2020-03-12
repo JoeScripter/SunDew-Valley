@@ -62,7 +62,7 @@ public class GameWindow extends JFrame {
 
     private void setupGraphics(){
 
-        bitmap = new BufferedImage(this.getWidth(), this.getHeight(), BufferedImage.TYPE_INT_RGB);
+        bitmap = new BufferedImage(this.getWidth(), this.getHeight(), BufferedImage.TYPE_INT_ARGB);
         renderer = new Renderer(bitmap);
         display = new Display(bitmap);
 

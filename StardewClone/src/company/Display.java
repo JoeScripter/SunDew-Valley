@@ -7,7 +7,6 @@ import java.awt.image.BufferedImage;
 public class Display extends JPanel {
 
     private BufferedImage bitmap;
-    private Graphics2D g;
 
     public Display(BufferedImage b){
         bitmap = b;
