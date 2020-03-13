@@ -5,7 +5,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-public class TileGrass extends Tile{
+public class TileGrass extends Tile {
 
     public static final int id = 0;
 
@@ -16,12 +16,12 @@ public class TileGrass extends Tile{
         super(x, y, true);
     }
 
-    public static BufferedImage getTileSprite(){
-        if(sprite == null){
-            try{
+    public static BufferedImage getTileSprite() {
+        if (sprite == null) {
+            try {
                 sprite = ImageIO.read(new File(spritePath));
-            }catch(IOException e){
-                System.out.println(e);
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
         return sprite;

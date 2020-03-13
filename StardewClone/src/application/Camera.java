@@ -31,8 +31,8 @@ public class Camera {
         this.yMax = yMax;
         this.width = width;
         this.height = height;
-        this.widthHalf = width/2;
-        this.heightHalf = height/2;
+        this.widthHalf = width / 2;
+        this.heightHalf = height / 2;
         setX(x);
         setY(y);
         calculateCorners();
@@ -40,8 +40,8 @@ public class Camera {
         calculateOffsets();
     }
 
-    public void update(){
-        if(update) {
+    public void update() {
+        if (update) {
             calculateCorners();
             calculateDrawableBorders();
             calculateOffsets();
@@ -49,7 +49,7 @@ public class Camera {
         }
     }
 
-    private void calculateCorners(){
+    private void calculateCorners() {
         xUpperRight = Math.min(xMax, x + widthHalf);
         yUpperRight = Math.max(0, y - heightHalf);
 
@@ -57,36 +57,36 @@ public class Camera {
         yLowerLeft = Math.min(yMax, y + heightHalf);
     }
 
-    private void calculateOffsets(){
+    private void calculateOffsets() {
         screenOffsetX = xLowerLeft;
         screenOffsetY = yUpperRight;
     }
 
-    public int getScreenOffsetX(){
+    public int getScreenOffsetX() {
         return screenOffsetX;
     }
 
-    public int getScreenOffsetY(){
+    public int getScreenOffsetY() {
         return screenOffsetY;
     }
 
-    private int calculateDrawableXStart(){
+    private int calculateDrawableXStart() {
         return (xLowerLeft) / Tile.TILE_SCALE;
     }
 
-    private int calculateDrawableXEnd(){
+    private int calculateDrawableXEnd() {
         return (xUpperRight + Tile.TILE_SCALE - 1) / Tile.TILE_SCALE;
     }
 
-    private int calculateDrawableYStart(){
+    private int calculateDrawableYStart() {
         return (yUpperRight) / Tile.TILE_SCALE;
     }
 
-    private int calculateDrawableYEnd(){
+    private int calculateDrawableYEnd() {
         return (yLowerLeft + Tile.TILE_SCALE - 1) / Tile.TILE_SCALE;
     }
 
-    public void calculateDrawableBorders(){
+    public void calculateDrawableBorders() {
         drawableXStart = calculateDrawableXStart();
         drawableXEnd = calculateDrawableXEnd();
         drawableYStart = calculateDrawableYStart();
@@ -143,13 +143,11 @@ public class Camera {
 
     public void setX(int x) {
 
-        if(x - widthHalf < 0){
+        if (x - widthHalf < 0) {
             this.x = widthHalf;
-        }
-        else if((x + widthHalf) > xMax){
+        } else if ((x + widthHalf) > xMax) {
             this.x = xMax - widthHalf;
-        }
-        else{
+        } else {
             this.x = x;
         }
         update = true;
@@ -157,13 +155,11 @@ public class Camera {
 
     public void setY(int y) {
 
-        if(y - heightHalf < 0){
+        if (y - heightHalf < 0) {
             this.y = heightHalf;
-        }
-        else if(y + heightHalf > yMax){
+        } else if (y + heightHalf > yMax) {
             this.y = yMax - heightHalf;
-        }
-        else{
+        } else {
             this.y = y;
         }
         update = true;

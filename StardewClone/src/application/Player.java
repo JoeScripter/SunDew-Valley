@@ -5,7 +5,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-public class Player implements Drawable{
+public class Player implements Drawable {
 
     private int x;
     private int y;
@@ -28,7 +28,7 @@ public class Player implements Drawable{
         this.speed = speed;
         try {
             sprite = ImageIO.read(new File(spritePath));
-        }catch(IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -46,25 +46,21 @@ public class Player implements Drawable{
     }
 
     public void setX(int x) {
-        if(x < 0){
+        if (x < 0) {
             this.x = 0;
-        }
-        else if(x > Map.xMax-PLAYER_TILE_SCALE){
-            this.x = Map.xMax-PLAYER_TILE_SCALE;
-        }
-        else{
+        } else if (x > Map.xMax - PLAYER_TILE_SCALE) {
+            this.x = Map.xMax - PLAYER_TILE_SCALE;
+        } else {
             this.x = x;
         }
     }
 
     public void setY(int y) {
-        if(y < 0){
+        if (y < 0) {
             this.y = 0;
-        }
-        else if(y > Map.yMax-PLAYER_TILE_SCALE){
-            this.y = Map.yMax-PLAYER_TILE_SCALE;
-        }
-        else{
+        } else if (y > Map.yMax - PLAYER_TILE_SCALE) {
+            this.y = Map.yMax - PLAYER_TILE_SCALE;
+        } else {
             this.y = y;
         }
     }

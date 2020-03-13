@@ -89,8 +89,6 @@ public class Map {
         int y = indexY;
         if(x >= mapTiles.length) x = mapTiles.length-1;
         if(y >= mapTiles[0].length) y = mapTiles[0].length-1;
-        System.out.println(mapTiles.length);
-        System.out.println(mapTiles[0].length);
         return mapTiles[y][x];
     }
 

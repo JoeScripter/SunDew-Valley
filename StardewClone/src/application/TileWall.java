@@ -5,7 +5,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-public class TileWall extends Tile{
+public class TileWall extends Tile {
 
     public static final int id = 1;
 
@@ -16,11 +16,11 @@ public class TileWall extends Tile{
         super(x, y, false);
     }
 
-    public static BufferedImage getTileSprite(){
-        if(sprite == null){
-            try{
+    public static BufferedImage getTileSprite() {
+        if (sprite == null) {
+            try {
                 sprite = ImageIO.read(new File(spritePath));
-            }catch(IOException e){
+            } catch (IOException e) {
                 System.out.println(e);
             }
         }

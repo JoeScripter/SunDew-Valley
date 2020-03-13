@@ -13,7 +13,7 @@ public class GameScreen extends JPanel {
     }
 
     @Override
-    public void paintComponent(Graphics g){
+    public void paintComponent(Graphics g) {
         scene.flush();
         g.drawImage(scene, 0, 0, this);
     }

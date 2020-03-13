@@ -5,10 +5,10 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-public class Tile implements Drawable{
+public class Tile implements Drawable {
 
     public static final int TILE_SCALE = 64;
-    public static final int TILE_SCALE_HALF = TILE_SCALE/2;
+    public static final int TILE_SCALE_HALF = TILE_SCALE / 2;
 
     private static final String defaultTileSpritePath = ".\\tile sprites\\default.png";
     private static BufferedImage defaultTileSprite;
@@ -24,12 +24,12 @@ public class Tile implements Drawable{
         this.passable = passable;
     }
 
-    public static BufferedImage getTileSprite(){
-        if(defaultTileSprite == null){
-            try{
+    public static BufferedImage getTileSprite() {
+        if (defaultTileSprite == null) {
+            try {
                 defaultTileSprite = ImageIO.read(new File(defaultTileSpritePath));
-            }catch(IOException e){
-                System.out.println(e);
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
         return defaultTileSprite;
