@@ -1,0 +1,5 @@
+package gameApplication;
+
+class AppMainTest {
+
+}
