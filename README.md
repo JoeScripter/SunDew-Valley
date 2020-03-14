@@ -4,5 +4,5 @@ Progress so far...
  * collision detection
  * dynamic camera
  
-![progress so far](https://i.imgur.com/NyK4h6z.png)
+![progress so far](https://github.com/JoeScripter/SunDew-Valley/blob/master/game_play.gif)
 
