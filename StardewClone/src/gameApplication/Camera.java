@@ -2,7 +2,7 @@ package gameApplication;
 
 import java.awt.*;
 
-public class Camera {
+public class Camera implements Updatable{
 
     private boolean update;
 
@@ -62,10 +62,10 @@ public class Camera {
     }
 
     public void calculateVisibleIndexes() {
-        visibleXStart = x / Tile.TILE_SCALE;
-        visibleXEnd = (xLowerRight + Tile.TILE_SCALE - 1) / Tile.TILE_SCALE;
-        visibleYStart = y / Tile.TILE_SCALE;
-        visibleYEnd = (yLowerRight + Tile.TILE_SCALE - 1) / Tile.TILE_SCALE;
+        visibleXStart = x / TileEntity.TILE_SCALE;
+        visibleXEnd = (xLowerRight + TileEntity.TILE_SCALE - 1) / TileEntity.TILE_SCALE;
+        visibleYStart = y / TileEntity.TILE_SCALE;
+        visibleYEnd = (yLowerRight + TileEntity.TILE_SCALE - 1) / TileEntity.TILE_SCALE;
     }
 
     public void setCenter() {

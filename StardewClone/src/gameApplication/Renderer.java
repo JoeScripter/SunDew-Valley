@@ -5,27 +5,27 @@ import java.awt.image.BufferedImage;
 
 public class Renderer {
 
-    private static BufferedImage scene;
-    private static Graphics2D graphics;
+    private BufferedImage image;
+    private Graphics2D graphics;
 
-    public Renderer() {
-        if (scene == null) {
-            scene = new BufferedImage(GameWindow.WIDTH, GameWindow.HEIGHT, BufferedImage.TYPE_INT_ARGB);
-            graphics = scene.createGraphics();
-        }
-
+    public Renderer(BufferedImage image) {
+        this.image = image;
+        graphics = image.createGraphics();
     }
 
-    public static BufferedImage getScene() {
-        return scene;
-    }
-
-    public static void drawImage(BufferedImage image, int x, int y) {
+    public void drawImage(BufferedImage image, int x, int y) {
         graphics.drawImage(image, x, y, null);
     }
 
-    public static void clear() {
+    public void drawCrossHair(Point center){
+        graphics.setColor(Color.RED);
+        graphics.setStroke(new BasicStroke(2));
+        graphics.drawLine(center.x - 10, center.y, center.x + 10, center.y);
+        graphics.drawLine(center.x, center.y - 10, center.x, center.y + 10);
+    }
+
+    public void clear() {
         graphics.setBackground(Color.WHITE);
-        graphics.clearRect(0, 0, scene.getWidth(), scene.getHeight());
+        graphics.clearRect(0, 0, image.getWidth(), image.getHeight());
     }
 }

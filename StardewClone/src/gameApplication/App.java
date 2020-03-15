@@ -7,6 +7,7 @@ import java.awt.event.KeyEvent;
 
 public class App {
     private GameWindow window;
+    private Renderer renderer;
     private Map map;
     private Player p;
     private Camera c;
@@ -24,8 +25,9 @@ public class App {
     }
 
     private void init() {
-        new Renderer();
         window = new GameWindow();
+        renderer = window.getRenderer();
+
         window.addKeyListener(new KeyAdapter() {
 
             @Override
@@ -71,6 +73,7 @@ public class App {
         p = new Player(map.getxMax() / 2, map.getyMax() / 2, 7);
         c = new Camera(p, map.getxMax(), map.getyMax());
         itemsToDraw = map.getMapTiles();
+        System.out.println(map.getIdsOfSpritesToLoad());
     }
 
     private void startMainLoop() {
@@ -124,11 +127,11 @@ public class App {
 
             for (int x = c.getVisibleXStart(); x < c.getVisibleXEnd(); x++) {
                 Drawable itemToDraw = itemsToDraw[y][x];
-                Renderer.drawImage(itemToDraw.getSprite(), itemToDraw.getX() - xOffset,
+                renderer.drawImage(itemToDraw.getSprite(), itemToDraw.getX() - xOffset,
                         itemToDraw.getY() - yOffset);
             }
         }
-        Renderer.drawImage(p.getSprite(), p.getX() - xOffset, p.getY() - yOffset);
+        renderer.drawImage(p.getSprite(), p.getX() - xOffset, p.getY() - yOffset);
 
         window.getScreen().repaint();
     }
@@ -141,11 +144,11 @@ public class App {
         corners[1] = new Point(p.getX() + Player.PLAYER_TILE_SCALE - 1, p.getY());
 
         for (Point corner : corners) {
-            int x = corner.x / Tile.TILE_SCALE;
-            int y = corner.y / Tile.TILE_SCALE;
+            int x = corner.x / TileEntity.TILE_SCALE;
+            int y = corner.y / TileEntity.TILE_SCALE;
             Drawable tile = map.getMapTile(x, y);
             if (!tile.isPassable()) {
-                remainingSpeedUp = p.getY() + p.getSpeed() - (tile.getY() + Tile.TILE_SCALE);
+                remainingSpeedUp = p.getY() + p.getSpeed() - (tile.getY() + TileEntity.TILE_SCALE);
                 return true;
             }
         }
@@ -160,8 +163,8 @@ public class App {
         corners[1] = new Point(p.getX() + Player.PLAYER_TILE_SCALE - 1, p.getY() + Player.PLAYER_TILE_SCALE);
 
         for (Point corner : corners) {
-            int x = corner.x / Tile.TILE_SCALE;
-            int y = corner.y / Tile.TILE_SCALE;
+            int x = corner.x / TileEntity.TILE_SCALE;
+            int y = corner.y / TileEntity.TILE_SCALE;
             Drawable tile = map.getMapTile(x, y);
             if (!tile.isPassable()) {
                 remainingSpeedDown = tile.getY() - (p.getY() + Player.PLAYER_TILE_SCALE - p.getSpeed());
@@ -179,11 +182,11 @@ public class App {
         corners[1] = new Point(p.getX(), p.getY() + Player.PLAYER_TILE_SCALE - 1);
 
         for (Point corner : corners) {
-            int x = corner.x / Tile.TILE_SCALE;
-            int y = corner.y / Tile.TILE_SCALE;
+            int x = corner.x / TileEntity.TILE_SCALE;
+            int y = corner.y / TileEntity.TILE_SCALE;
             Drawable tile = map.getMapTile(x, y);
             if (!tile.isPassable()) {
-                remainingSpeedLeft = p.getX() + p.getSpeed() - (tile.getX() + Tile.TILE_SCALE);
+                remainingSpeedLeft = p.getX() + p.getSpeed() - (tile.getX() + TileEntity.TILE_SCALE);
                 return true;
             }
         }
@@ -198,8 +201,8 @@ public class App {
         corners[1] = new Point(p.getX() + Player.PLAYER_TILE_SCALE, p.getY() + Player.PLAYER_TILE_SCALE - 1);
 
         for (Point corner : corners) {
-            int x = corner.x / Tile.TILE_SCALE;
-            int y = corner.y / Tile.TILE_SCALE;
+            int x = corner.x / TileEntity.TILE_SCALE;
+            int y = corner.y / TileEntity.TILE_SCALE;
             Drawable tile = map.getMapTile(x, y);
             if (!tile.isPassable()) {
                 remainingSpeedRight = tile.getX() - (p.getX() + Player.PLAYER_TILE_SCALE - p.getSpeed());

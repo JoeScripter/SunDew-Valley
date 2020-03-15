@@ -6,16 +6,18 @@ import java.awt.image.BufferedImage;
 
 public class GameScreen extends JPanel {
 
-    private BufferedImage scene;
+    private BufferedImage image;
 
-    public GameScreen() {
-        scene = Renderer.getScene();
+    public GameScreen(BufferedImage image) {
+        this.image = image;
+
+        setPreferredSize(new Dimension(GameWindow.WIDTH, GameWindow.HEIGHT));
     }
 
     @Override
     public void paintComponent(Graphics g) {
-        scene.flush();
-        g.drawImage(scene, 0, 0, this);
+        image.flush();
+        g.drawImage(image, 0, 0, this);
     }
 
 }

@@ -6,7 +6,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-public class Player implements Drawable {
+public class Player implements Drawable, Updatable {
 
     private boolean update;
 
@@ -22,7 +22,7 @@ public class Player implements Drawable {
     private boolean right = false;
     private boolean left = false;
 
-    private String spritePath = ".\\creature_sprites\\player.png";
+    private String spritePath = ".\\creature_sprites\\player_sprite.png";
     private BufferedImage sprite;
 
     public Player(int x, int y, int speed) {
